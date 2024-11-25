@@ -1,0 +1,25 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    font-weight: 500;
+    font-size: 35px;
+    font-family: "Bree Serif", serif;
+
+    .themeIconBtn {
+        height: 35px;
+        width: 35px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .themeIcon {
+        width: 35px;
+    }
+}
+
