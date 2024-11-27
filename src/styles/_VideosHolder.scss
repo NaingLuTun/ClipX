@@ -1,0 +1,38 @@
+.videosHolder {
+    width: 30%;
+    
+}
+
+.videoAdder {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+}
+
+.addToQueueBtn {
+    background-color: #fe0908;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:disabled {
+        background-color: #fe080873;
+        cursor: not-allowed;
+    }
+}
+
+.addToQueueInput {
+    padding: 5px 10px;
+    border: 0.5px solid rgba(0, 0, 0, 0.315);
+    border-radius: 5px;
+
+    &:focus {
+        outline: none;
+    }
+}

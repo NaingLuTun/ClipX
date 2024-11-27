@@ -20,11 +20,62 @@ header .themeIcon {
   width: 35px;
 }
 
+.mainVideoContainer {
+  width: 70%;
+  height: 100%;
+}
+
+.videosHolder {
+  width: 30%;
+}
+
+.videoAdder {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+}
+
+.addToQueueBtn {
+  background-color: #fe0908;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.addToQueueBtn:hover {
+  cursor: pointer;
+}
+.addToQueueBtn:disabled {
+  background-color: rgba(254, 8, 8, 0.4509803922);
+  cursor: not-allowed;
+}
+
+.addToQueueInput {
+  padding: 5px 10px;
+  border: 0.5px solid rgba(0, 0, 0, 0.315);
+  border-radius: 5px;
+}
+.addToQueueInput:focus {
+  outline: none;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  /* font-family: "Funnel Display", sans-serif; */
+  font-family: "Funnel Display", sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .darkThemeHeader {
@@ -32,15 +83,12 @@ header .themeIcon {
   color: white;
 }
 
-.body {
-  height: 100vh;
+.bodyContainer {
+  flex: 1;
+  display: flex;
+  background-color: rgb(215, 224, 226);
 }
 
 .darkThemeBody {
   background-color: #1f1f1f;
-}
-
-.videoContainer {
-  width: 560px;
-  height: 315px;
 }/*# sourceMappingURL=App.css.map */

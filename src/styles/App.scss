@@ -1,11 +1,24 @@
 @import "./Header";
+@import "./MainVideo";
+@import "./VideosHolder";
 @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap');
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    /* font-family: "Funnel Display", sans-serif; */
+    font-family: "Funnel Display", sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .darkThemeHeader {
@@ -13,15 +26,13 @@
     color: white;
 }
 
-.body {
-    height: 100vh; // change later
+.bodyContainer {
+    flex: 1;
+    display: flex;
+    background-color: rgb(215, 224, 226);
 }
 
 .darkThemeBody {
     background-color: #1f1f1f;
 }
 
-.videoContainer {
-    width: 560px;
-    height: 315px;
-}

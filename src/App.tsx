@@ -6,6 +6,8 @@ import Header from './components/Header'
 import { useSelector } from 'react-redux'
 import { RootState } from './state/store'
 import ReactPlayer from 'react-player'
+import MainVideo from './components/MainVideo'
+import VideosHolder from './components/VideosHolder'
 
 
 /* api key = AIzaSyB9flZMBsVPHLswQrWQmbrUnP6ya15HyWA */
@@ -15,20 +17,14 @@ function App() {
 
 
   return (
-    <>
+    <div className='mainContainer'>
       <Header />
 
-      <div className={`body ${theme === "dark" ? "darkThemeBody":""}`}>
-        <div className="videoContainer">
-          <ReactPlayer 
-          url="https://www.youtube.com/watch?v=1-ucEQ5sa1Q"
-          controls
-          width="100%"
-          height="100%"
-          />
-        </div>
+      <div className={`bodyContainer ${theme === "dark" ? "darkThemeBody":""}`}>
+        <MainVideo />
+        <VideosHolder />
       </div>
-    </>
+    </div>
   )
 }
 
