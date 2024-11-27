@@ -10,8 +10,6 @@ import MainVideo from './components/MainVideo'
 import VideosHolder from './components/VideosHolder'
 
 
-/* api key = AIzaSyB9flZMBsVPHLswQrWQmbrUnP6ya15HyWA */
-
 function App() {
   const theme = useSelector((state: RootState) => state.themeReducer.mode)
 

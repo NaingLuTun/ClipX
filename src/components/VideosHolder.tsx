@@ -2,7 +2,7 @@
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { addVideos, deleteVideos } from '../state/videoSlice/videoSlice'
+import { addVideosAsync, deleteVideos } from '../state/videoSlice/videoSlice'
 import { AppDispatch, RootState } from '../state/store'
 import React, { useState } from 'react'
 
@@ -29,7 +29,7 @@ const VideosHolder = () => {
     }
 
     const handleAddToQueue = () => {
-      dispatch(addVideos(url))
+      dispatch(addVideosAsync(url))
     }
 
 
@@ -42,7 +42,7 @@ const VideosHolder = () => {
       
       <div>
         {videos.map((url, index) => (
-          <div key={index}>{url}</div>
+          <div key={index}>{url.snippet.title}</div>
         ))}
       </div>
 
