@@ -2,7 +2,7 @@
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { addUrl, addVideosAsync, deleteVideos, setCurrentVideo } from '../state/videoSlice/videoSlice'
+import { addUrl, addVideosAsync, /* deleteVideos (for later) */ setCurrentVideo } from '../state/videoSlice/videoSlice'
 import { AppDispatch, RootState } from '../state/store'
 import React, { useState } from 'react'
 
@@ -11,7 +11,7 @@ import "../styles/App.css"
 const VideosHolder = () => {
 
     const [url, setUrl] = useState<string>("")
-    const [isValid, setIsValid] = useState(true)
+    const [isValid, setIsValid] = useState(false)
 
     const videos = useSelector((state: RootState) => state.videoReducer.videos)
     const videosUrl = useSelector((state: RootState) => state.videoReducer.videoUrl)

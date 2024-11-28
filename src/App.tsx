@@ -5,7 +5,6 @@ import './styles/App.css'
 import Header from './components/Header'
 import { useSelector } from 'react-redux'
 import { RootState } from './state/store'
-import ReactPlayer from 'react-player'
 import MainVideo from './components/MainVideo'
 import VideosHolder from './components/VideosHolder'
 
