@@ -2,16 +2,19 @@
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { addVideosAsync, deleteVideos } from '../state/videoSlice/videoSlice'
+import { addUrl, addVideosAsync, deleteVideos, setCurrentVideo } from '../state/videoSlice/videoSlice'
 import { AppDispatch, RootState } from '../state/store'
 import React, { useState } from 'react'
+
+import "../styles/App.css"
 
 const VideosHolder = () => {
 
     const [url, setUrl] = useState<string>("")
-    const [isValid, setIsValid] = useState(false)
+    const [isValid, setIsValid] = useState(true)
 
     const videos = useSelector((state: RootState) => state.videoReducer.videos)
+    const videosUrl = useSelector((state: RootState) => state.videoReducer.videoUrl)
 
     const dispatch = useDispatch<AppDispatch>()
 
@@ -28,22 +31,30 @@ const VideosHolder = () => {
       }
     }
 
+
+
     const handleAddToQueue = () => {
+      dispatch(addUrl(url))
       dispatch(addVideosAsync(url))
+      setUrl("")
     }
 
 
   return (
     <div className='videosHolder'>
       <div className='videoAdder'>
-        <input type="text" placeholder='Paste Youtube link here' className='addToQueueInput' onChange={handleInputChange}/>
+        <input value={url} type="text" placeholder='Paste Youtube link here' className='addToQueueInput' onChange={handleInputChange}/>
         <button disabled={isValid == false} className='addToQueueBtn' onClick={handleAddToQueue}>Add to Queue</button>
       </div>
       
-      <div>
-        {videos.map((url, index) => (
-          <div key={index}>{url.snippet.title}</div>
+      <div> 
+        {videos.map((video, index) => (
+          <div key={index} className='individualVideoContainer' onClick={() => dispatch(setCurrentVideo(videosUrl[index]))}>
+            <img src={video.snippet.thumbnails.high.url} alt="thumbnail" className="thumbnail"/>  
+            {video.snippet.title}
+          </div>
         ))}
+        
       </div>
 
     </div>

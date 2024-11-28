@@ -36,3 +36,21 @@
         outline: none;
     }
 }
+
+.individualVideoContainer {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    border-radius: 3px;
+    background-color: white;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.thumbnail {
+    width: 100px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
