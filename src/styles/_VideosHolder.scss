@@ -1,6 +1,7 @@
 .videosHolder {
     width: 30%;
-    
+    display: flex;
+    flex-direction: column;
 }
 
 .videoAdder {
@@ -8,6 +9,7 @@
     justify-content: center;
     gap: 5px;
     width: 100%;
+    margin: 20px 0;
 }
 
 .addToQueueBtn {
@@ -37,9 +39,22 @@
     }
 }
 
+.videosListContainer {
+    background-color: rgb(153, 169, 175);
+    padding: 10px;
+    flex-grow: 1;
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+.darkVideosListContainer {
+    background-color: rgb(10, 10, 10);
+}
+
 .individualVideoContainer {
     display: flex;
     align-items: center;
+    
     margin: 5px;
     border-radius: 3px;
     background-color: white;
@@ -49,8 +64,68 @@
     }
 }
 
+.darkIndividiualVideosContainer {
+    background-color: #1f1f1f;
+}
+
+.thumbnailContainer {
+    position: relative;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.playIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    opacity: 0;
+}
+
+.showPlayIcon {
+    opacity: 1;
+}
+
 .thumbnail {
-    width: 100px;
+    width: 100%;
+    height: 100%;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
+}
+
+
+.videoTitle {
+    width: 55%;
+    height: 100%;
+}
+
+.darkModeVideoTitle {
+    color: white;
+}
+
+
+
+.deleteBtnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.075);
+    }
+}
+
+.darkModeDeleteBtnContainer {
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.075);
+    }
+}
+
+.deleteIcon {
+    width: 25px;
 }

@@ -6,18 +6,18 @@ header {
   align-items: center;
   padding: 10px 50px;
   font-weight: 500;
-  font-size: 35px;
+  font-size: 30px;
   font-family: "Bree Serif", serif;
 }
 header .themeIconBtn {
-  height: 35px;
-  width: 35px;
+  height: 30px;
+  width: 30px;
 }
 header .themeIconBtn:hover {
   cursor: pointer;
 }
 header .themeIcon {
-  width: 35px;
+  width: 30px;
 }
 
 .mainVideoContainer {
@@ -27,6 +27,8 @@ header .themeIcon {
 
 .videosHolder {
   width: 30%;
+  display: flex;
+  flex-direction: column;
 }
 
 .videoAdder {
@@ -34,6 +36,7 @@ header .themeIcon {
   justify-content: center;
   gap: 5px;
   width: 100%;
+  margin: 20px 0;
 }
 
 .addToQueueBtn {
@@ -60,6 +63,18 @@ header .themeIcon {
   outline: none;
 }
 
+.videosListContainer {
+  background-color: rgb(153, 169, 175);
+  padding: 10px;
+  flex-grow: 1;
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+.darkVideosListContainer {
+  background-color: rgb(10, 10, 10);
+}
+
 .individualVideoContainer {
   display: flex;
   align-items: center;
@@ -71,10 +86,65 @@ header .themeIcon {
   cursor: pointer;
 }
 
+.darkIndividiualVideosContainer {
+  background-color: #1f1f1f;
+}
+
+.thumbnailContainer {
+  position: relative;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.playIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  opacity: 0;
+}
+
+.showPlayIcon {
+  opacity: 1;
+}
+
 .thumbnail {
-  width: 100px;
+  width: 100%;
+  height: 100%;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
+}
+
+.videoTitle {
+  width: 55%;
+  height: 100%;
+}
+
+.darkModeVideoTitle {
+  color: white;
+}
+
+.deleteBtnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.deleteBtnContainer:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.darkModeDeleteBtnContainer:hover {
+  background-color: rgba(255, 255, 255, 0.075);
+}
+
+.deleteIcon {
+  width: 25px;
 }
 
 * {

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface VideoSliceState {
     videos: Array<YoutubeAPISnippet>,
-    videoUrl: string[],
+    videosUrl: string[],
     currentVideo: string | null,
 }
 
@@ -30,7 +30,7 @@ interface YoutubeAPIItem {
 
 const apiKey= "AIzaSyB9flZMBsVPHLswQrWQmbrUnP6ya15HyWA"
 
-const initialState:VideoSliceState = {videos: [], videoUrl: [], currentVideo: null}
+const initialState:VideoSliceState = {videos: [], videosUrl: [], currentVideo: null}
 
 const videoSlice = createSlice({
     name: "videoSlice",
@@ -38,13 +38,13 @@ const videoSlice = createSlice({
     reducers: {
         deleteVideos: (state, action:PayloadAction<number>) => {
             state.videos = state.videos.filter((_, i) => i !== action.payload)
+            state.videosUrl = state.videosUrl.filter((_,i) => i !== action.payload)
         },
         addUrl: (state, action:PayloadAction<string>) => {
-            state.videoUrl.push(action.payload)
+            state.videosUrl.push(action.payload)
         },
         setCurrentVideo: (state, action:PayloadAction<string>) => {
             state.currentVideo = action.payload
-            console.log(state.currentVideo)
         }
     
     },
