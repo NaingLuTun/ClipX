@@ -65,6 +65,7 @@ header .developer {
 
 .addVideosText {
   position: absolute;
+  text-align: center;
   color: #99a9af;
   font-size: 40px;
   top: 50%;
