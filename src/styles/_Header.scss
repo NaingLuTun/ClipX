@@ -8,6 +8,7 @@ header {
     font-weight: 500;
     font-size: 30px;
     font-family: "Bree Serif", serif;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 
     .themeIconBtn {
         height: 30px;
@@ -18,8 +19,44 @@ header {
         }
     }
 
+    .headerIconsContainer {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
     .themeIcon {
         width: 30px;
+    }
+
+    .githubLink {
+        height: fit-content;
+        background-color: black;
+        padding: 2px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+
+    .githubIcon {
+        width: 27px;
+    }
+
+    .headerTextContainer {
+        display: flex;
+        gap: 10px;
+        align-items: flex-end;
+    }
+
+    .developer {
+        font-size: 10px;
+        opacity: 0.5;
+    }
+}
+
+@media (max-width: 500px) {
+    header {
+        padding: 10px 20px;
     }
 }
 

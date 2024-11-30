@@ -45,6 +45,10 @@ const videoSlice = createSlice({
         },
         setCurrentVideo: (state, action:PayloadAction<string>) => {
             state.currentVideo = action.payload
+        },
+        clearQueue: (state) => {
+            state.videos = []
+            state.videosUrl = []
         }
     
     },
@@ -103,6 +107,6 @@ export const addVideosAsync = createAsyncThunk(
     }
 )
 
-export const {setCurrentVideo, addUrl, deleteVideos} = videoSlice.actions
+export const {setCurrentVideo, addUrl, deleteVideos, clearQueue} = videoSlice.actions
 
 export default videoSlice.reducer

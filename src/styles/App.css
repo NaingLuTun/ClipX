@@ -8,6 +8,7 @@ header {
   font-weight: 500;
   font-size: 30px;
   font-family: "Bree Serif", serif;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
 header .themeIconBtn {
   height: 30px;
@@ -16,15 +17,66 @@ header .themeIconBtn {
 header .themeIconBtn:hover {
   cursor: pointer;
 }
+header .headerIconsContainer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
 header .themeIcon {
   width: 30px;
 }
+header .githubLink {
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: black;
+  padding: 2px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+header .githubIcon {
+  width: 27px;
+}
+header .headerTextContainer {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+header .developer {
+  font-size: 10px;
+  opacity: 0.5;
+}
 
+@media (max-width: 500px) {
+  header {
+    padding: 10px 20px;
+  }
+}
 .mainVideoContainer {
   width: 70%;
   height: 100%;
+  position: relative;
+  background-color: white;
 }
 
+.darkMainVideoContainer {
+  background-color: #1b1b1b;
+}
+
+.addVideosText {
+  position: absolute;
+  color: #99a9af;
+  font-size: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 950px) {
+  .mainVideoContainer {
+    width: 100%;
+  }
+}
 .videosHolder {
   width: 30%;
   display: flex;
@@ -39,17 +91,31 @@ header .themeIcon {
   margin: 20px 0;
 }
 
-.addToQueueBtn {
+.inputHolder {
+  position: relative;
+}
+
+.invalidText {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -18px;
+  font-size: 12px;
+  text-wrap: nowrap;
+  color: #ff0000;
+}
+
+.addToQueueBtn, .clearQueueBtn {
   background-color: #fe0908;
   color: white;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
 }
-.addToQueueBtn:hover {
+.addToQueueBtn:hover, .clearQueueBtn:hover {
   cursor: pointer;
 }
-.addToQueueBtn:disabled {
+.addToQueueBtn:disabled, .clearQueueBtn:disabled {
   background-color: rgba(254, 8, 8, 0.4509803922);
   cursor: not-allowed;
 }
@@ -64,15 +130,25 @@ header .themeIcon {
 }
 
 .videosListContainer {
-  background-color: rgb(153, 169, 175);
+  background-color: #99a9af;
   padding: 10px;
   flex-grow: 1;
   height: 80vh;
+  position: relative;
   overflow-y: scroll;
 }
 
 .darkVideosListContainer {
-  background-color: rgb(10, 10, 10);
+  background-color: #0a0a0a;
+}
+
+.queueListText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 20px;
 }
 
 .individualVideoContainer {
@@ -82,12 +158,18 @@ header .themeIcon {
   border-radius: 3px;
   background-color: white;
 }
-.individualVideoContainer:hover {
-  cursor: pointer;
-}
 
 .darkIndividiualVideosContainer {
   background-color: #1f1f1f;
+}
+
+.thumbnailAndTitleContainer {
+  display: flex;
+  align-items: center;
+  width: 85%;
+}
+.thumbnailAndTitleContainer:hover {
+  cursor: pointer;
 }
 
 .thumbnailContainer {
@@ -137,16 +219,38 @@ header .themeIcon {
 }
 .deleteBtnContainer:hover {
   background-color: rgba(0, 0, 0, 0.075);
+  cursor: pointer;
 }
 
 .darkModeDeleteBtnContainer:hover {
   background-color: rgba(255, 255, 255, 0.075);
+  cursor: pointer;
 }
 
 .deleteIcon {
   width: 25px;
 }
 
+@media (max-width: 950px) {
+  .videosHolder {
+    width: 100%;
+  }
+  .videosListContainer {
+    flex-grow: 0;
+    height: 40vh;
+  }
+  .addToQueueBtn, .clearQueueBtn {
+    font-size: 12px;
+  }
+}
+@media (width: 1024px) {
+  .addToQueueBtn, .clearQueueBtn {
+    font-size: 12px;
+  }
+  .invalidText {
+    bottom: -12px;
+  }
+}
 * {
   padding: 0;
   margin: 0;
@@ -166,7 +270,7 @@ html, body {
 }
 
 .darkThemeHeader {
-  background-color: #141414;
+  background-color: #1b1b1b;
   color: white;
 }
 
@@ -178,4 +282,10 @@ html, body {
 
 .darkThemeBody {
   background-color: #1f1f1f;
+}
+
+@media (max-width: 950px) {
+  .bodyContainer {
+    flex-direction: column;
+  }
 }/*# sourceMappingURL=App.css.map */

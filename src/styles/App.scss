@@ -22,7 +22,7 @@ html, body {
 }
 
 .darkThemeHeader {
-    background-color: #141414;
+    background-color: #1b1b1b;
     color: white;
 }
 
@@ -34,5 +34,11 @@ html, body {
 
 .darkThemeBody {
     background-color: #1f1f1f;
+}
+
+@media (max-width: 950px) {
+    .bodyContainer {
+        flex-direction: column;
+    }
 }
 

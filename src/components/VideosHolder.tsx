@@ -2,7 +2,7 @@
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { addUrl, addVideosAsync, deleteVideos, setCurrentVideo } from '../state/videoSlice/videoSlice'
+import { addUrl, addVideosAsync, deleteVideos, setCurrentVideo, clearQueue } from '../state/videoSlice/videoSlice'
 import { AppDispatch, RootState } from '../state/store'
 import React, { useState } from 'react'
 
@@ -41,55 +41,64 @@ const VideosHolder = () => {
 
 
     const handleAddToQueue = () => {
+      if(isValid === false) {
+        return
+      }
       dispatch(addUrl(url))
       dispatch(addVideosAsync(url))
       if(currentVideo === null) {
         dispatch(setCurrentVideo(url))
       }
       setUrl("")
-
-      
-    }
-
-    const handleConsoleLog = () => {
-      console.log(videosUrl)
+      setIsValid(false)
     }
 
 
   return (
     <div className='videosHolder'>
       <div className='videoAdder'>
-        <input value={url} type="text" placeholder='Paste Youtube link here' className='addToQueueInput' onChange={handleInputChange}/>
-        <button disabled={isValid == false} className='addToQueueBtn' onClick={handleAddToQueue}>Add to Queue</button>
-        <button onClick={handleConsoleLog} className='addToQueueBtn'>console log</button>
+
+        <div className='inputHolder'>
+          <input value={url} type="text" placeholder='Paste Youtube link here' className='addToQueueInput' onChange={handleInputChange}/>
+          {isValid === false && url.length>0 ? <p className='invalidText'>Invalid Youtube Link</p> : null}
+        </div>
+        
+        <button className='addToQueueBtn' onClick={handleAddToQueue}>Add to Queue</button>
+        <button onClick={() => dispatch(clearQueue())} className='clearQueueBtn'>Clear Queue</button>
+
+        
       </div>
       
       <div className={`${theme === "dark"? "darkVideosListContainer": ""} videosListContainer`}> 
-        {videos.map((video, index) => (
+        {videos.length > 0? 
+        videos.map((video, index) => (
           <div key={video.snippet.title + index} className={`${theme === "dark"? "darkIndividiualVideosContainer" : ""} individualVideoContainer`} >
-
-            <div className="thumbnailContainer"
-             onMouseEnter={() => setThumbnailHoveredIndex(index)}
-             onMouseLeave={() => setThumbnailHoveredIndex(null)}
-             >
-              <img src={playIcon} alt="play" className={`playIcon ${thumbnailHoveredIndex === index ? "showPlayIcon" : ""}`}/>
-              <img src={video.snippet.thumbnails.high.url} alt="thumbnail" className="thumbnail" onClick={() => dispatch(setCurrentVideo(videosUrl[index]))}/> 
-            </div>
-             
-            
-            <p 
-            className={`videoTitle ${theme === "dark"? "darkModeVideoTitle" : ""}`} onClick={() => dispatch(setCurrentVideo(videosUrl[index]))}
+            <div className='thumbnailAndTitleContainer' 
+            onClick={() => dispatch(setCurrentVideo(videosUrl[index]))} 
             onMouseEnter={() => setThumbnailHoveredIndex(index)}
-            onMouseLeave={() => setThumbnailHoveredIndex(null)}
-            >{
-              video.snippet.title}
-            </p>
+            onMouseLeave={() => setThumbnailHoveredIndex(null)}>
+              <div className="thumbnailContainer">
+                <img src={playIcon} alt="play" className={`playIcon ${thumbnailHoveredIndex === index ? "showPlayIcon" : ""}`}/>
+                <img src={video.snippet.thumbnails.high.url} alt="thumbnail" className="thumbnail" /> 
+              </div>
+              
+              
+              <p className={`videoTitle ${theme === "dark"? "darkModeVideoTitle" : ""}`}>{
+                video.snippet.title}
+              </p>
 
+            </div>
+            
             <div className={`deleteBtnContainer ${theme === "dark"? "darkModeDeleteBtnContainer" : ""}`} onClick={() => dispatch(deleteVideos(index))} >
               <img src={theme === "dark"? darkModeDeleteIcon : lightModeDeleteIcon} alt="delete" className='deleteIcon' />
             </div>
           </div>
-        ))}
+        ))
+        :
+        <p className='queueListText'>Queue List</p>
+      
+        }
+
         
       </div>
 

@@ -12,7 +12,22 @@
     margin: 20px 0;
 }
 
-.addToQueueBtn {
+.inputHolder {
+    position: relative;
+}
+
+.invalidText {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -18px;
+    font-size: 12px;
+    text-wrap: nowrap;
+    color: #ff0000;
+
+}
+
+.addToQueueBtn, .clearQueueBtn {
     background-color: #fe0908;
     color: white;
     border: none;
@@ -40,15 +55,25 @@
 }
 
 .videosListContainer {
-    background-color: rgb(153, 169, 175);
+    background-color: #99a9af;
     padding: 10px;
     flex-grow: 1;
     height: 80vh;
+    position: relative;
     overflow-y: scroll;
 }
 
 .darkVideosListContainer {
-    background-color: rgb(10, 10, 10);
+    background-color: #0a0a0a;
+}
+
+.queueListText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 20px;
 }
 
 .individualVideoContainer {
@@ -58,14 +83,20 @@
     margin: 5px;
     border-radius: 3px;
     background-color: white;
-
-    &:hover {
-        cursor: pointer;
-    }
 }
 
 .darkIndividiualVideosContainer {
     background-color: #1f1f1f;
+}
+
+.thumbnailAndTitleContainer {
+    display: flex;
+    align-items: center;
+    width: 85%;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .thumbnailContainer {
@@ -106,8 +137,6 @@
     color: white;
 }
 
-
-
 .deleteBtnContainer {
     display: flex;
     align-items: center;
@@ -117,15 +146,42 @@
     border-radius: 50%;
     &:hover {
         background-color: rgba(0, 0, 0, 0.075);
+        cursor: pointer;
     }
 }
 
 .darkModeDeleteBtnContainer {
     &:hover {
         background-color: rgba(255, 255, 255, 0.075);
+        cursor: pointer;
     }
 }
 
 .deleteIcon {
     width: 25px;
+}
+
+@media (max-width: 950px) {
+    .videosHolder {
+        width: 100%;
+    }
+
+    .videosListContainer {
+        flex-grow: 0;
+        height: 40vh;
+    }
+
+    .addToQueueBtn, .clearQueueBtn {
+        font-size: 12px;
+    }
+}
+
+@media (width: 1024px) {
+    .addToQueueBtn, .clearQueueBtn {
+        font-size: 12px;
+    }
+
+    .invalidText {
+        bottom: -12px;
+    }
 }

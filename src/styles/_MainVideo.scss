@@ -1,4 +1,25 @@
 .mainVideoContainer {
     width: 70%;
     height: 100%;
+    position: relative;
+    background-color: white;
+}
+
+.darkMainVideoContainer {
+    background-color: #1b1b1b;
+}
+
+.addVideosText {
+    position: absolute;
+    color: #99a9af;
+    font-size: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 950px) {
+    .mainVideoContainer {
+        width: 100%;
+    }
 }
