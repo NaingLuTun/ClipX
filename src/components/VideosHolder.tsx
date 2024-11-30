@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { addUrl, addVideosAsync, deleteVideos, setCurrentVideo, clearQueue } from '../state/videoSlice/videoSlice'
 import { AppDispatch, RootState } from '../state/store'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import "../styles/App.css"
 import lightModeDeleteIcon from "../assets/delete-icon/light-mode-delete-icon.svg"
@@ -17,7 +17,7 @@ const VideosHolder = () => {
     const [isValid, setIsValid] = useState(false)
 
     const videos = useSelector((state: RootState) => state.videoReducer.videos)
-    const videosUrl = useSelector((state: RootState) => state.videoReducer.videosUrl)
+    const videoUrls = useSelector((state: RootState) => state.videoReducer.videoUrls)
     const currentVideo = useSelector((state: RootState) => state.videoReducer.currentVideo)
 
     const theme = useSelector((state: RootState) => state.themeReducer.mode)
@@ -53,6 +53,32 @@ const VideosHolder = () => {
       setIsValid(false)
     }
 
+    useEffect(() => {
+      const storedUrls = localStorage.getItem("videoUrls")
+      const storedVideosInfo = localStorage.getItem("videosInfo")
+      if(storedUrls) {
+        
+        const retrievedUrls: string[] = JSON.parse(storedUrls)
+        console.log(retrievedUrls)
+        retrievedUrls.map(urls => {
+          dispatch(addUrl(urls))
+        })
+        console.log("url arrays",videoUrls)
+      }
+
+      if(storedVideosInfo) {
+        
+        const retrievedVideos: string[] = JSON.parse(storedVideosInfo)
+        console.log(retrievedVideos)
+        retrievedVideos.map(videos => {
+          dispatch(addVideosAsync(videos))
+        })
+        console.log("vidoes array", videos)
+      }
+      
+
+    },[])
+
 
   return (
     <div className='videosHolder'>
@@ -74,7 +100,7 @@ const VideosHolder = () => {
         videos.map((video, index) => (
           <div key={video.snippet.title + index} className={`${theme === "dark"? "darkIndividiualVideosContainer" : ""} individualVideoContainer`} >
             <div className='thumbnailAndTitleContainer' 
-            onClick={() => dispatch(setCurrentVideo(videosUrl[index]))} 
+            onClick={() => dispatch(setCurrentVideo(videoUrls[index]))} 
             onMouseEnter={() => setThumbnailHoveredIndex(index)}
             onMouseLeave={() => setThumbnailHoveredIndex(null)}>
               <div className="thumbnailContainer">

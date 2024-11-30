@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface VideoSliceState {
     videos: Array<YoutubeAPISnippet>,
-    videosUrl: string[],
+    videoUrls: string[],
     currentVideo: string | null,
 }
 
@@ -30,7 +30,7 @@ interface YoutubeAPIItem {
 
 const apiKey= "AIzaSyB9flZMBsVPHLswQrWQmbrUnP6ya15HyWA"
 
-const initialState:VideoSliceState = {videos: [], videosUrl: [], currentVideo: null}
+const initialState:VideoSliceState = {videos: [], videoUrls: [], currentVideo: null}
 
 const videoSlice = createSlice({
     name: "videoSlice",
@@ -38,17 +38,35 @@ const videoSlice = createSlice({
     reducers: {
         deleteVideos: (state, action:PayloadAction<number>) => {
             state.videos = state.videos.filter((_, i) => i !== action.payload)
-            state.videosUrl = state.videosUrl.filter((_,i) => i !== action.payload)
+            state.videoUrls = state.videoUrls.filter((_,i) => i !== action.payload)
+            const storedUrls = localStorage.getItem("videoUrls")
+            const storedVideosInfo = localStorage.getItem("videosInfo")
+
+            if(storedUrls) {
+                const retrievedUrls: string[] = JSON.parse(storedUrls)
+                const updatedUrls = retrievedUrls.filter((_,i) => i !== action.payload)
+
+                localStorage.setItem("videosUrls", JSON.stringify(updatedUrls))
+            }
+
+            if(storedVideosInfo) {
+                const retrievedVideos: string[] = JSON.parse(storedVideosInfo)
+                const updatedVideos = retrievedVideos.filter((_,i) => i !== action.payload)
+
+                localStorage.setItem("videosInfo", JSON.stringify(updatedVideos))
+            }
+
         },
         addUrl: (state, action:PayloadAction<string>) => {
-            state.videosUrl.push(action.payload)
+            state.videoUrls.push(action.payload)
+            localStorage.setItem("videoUrls", JSON.stringify(state.videoUrls))
         },
         setCurrentVideo: (state, action:PayloadAction<string>) => {
             state.currentVideo = action.payload
         },
         clearQueue: (state) => {
             state.videos = []
-            state.videosUrl = []
+            state.videoUrls = []
         }
     
     },
@@ -60,6 +78,7 @@ const videoSlice = createSlice({
             (state, action: PayloadAction<YoutubeAPISnippet | undefined>) => {
                 if(action.payload) {
                     state.videos.push(action.payload)
+                    localStorage.setItem("videosInfo", JSON.stringify(state.videos))
                 } else {
                     console.error("No valid video data to add")
                 }

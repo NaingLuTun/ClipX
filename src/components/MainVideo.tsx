@@ -9,20 +9,20 @@ import { setCurrentVideo } from '../state/videoSlice/videoSlice'
 
 const MainVideo = () => {
   const currentVideo = useSelector((state: RootState) => state.videoReducer.currentVideo)
-  const videosUrl = useSelector((state: RootState) => state.videoReducer.videosUrl)
+  const videoUrls = useSelector((state: RootState) => state.videoReducer.videoUrls)
 
   const theme = useSelector((state: RootState) => state.themeReducer.mode)
 
   const dispatch = useDispatch<AppDispatch>()
 
   const handleVideoEnd = () => {
-    if (currentVideo && videosUrl.length > 0) {
-      const currentIndex = videosUrl.indexOf(currentVideo)
+    if (currentVideo && videoUrls.length > 0) {
+      const currentIndex = videoUrls.indexOf(currentVideo)
       const nextIndex = currentIndex + 1 
-      if (nextIndex < videosUrl.length) {
-        dispatch(setCurrentVideo(videosUrl[nextIndex]))
+      if (nextIndex < videoUrls.length) {
+        dispatch(setCurrentVideo(videoUrls[nextIndex]))
       } else {
-        dispatch(setCurrentVideo(videosUrl[0]))
+        dispatch(setCurrentVideo(videoUrls[0]))
       }
     }
   }
@@ -33,7 +33,7 @@ const MainVideo = () => {
           <ReactPlayer 
           url={currentVideo}
           controls
-          playing={videosUrl.indexOf(currentVideo) === 0 || videosUrl.indexOf(currentVideo) === -1? false : true}
+          playing={videoUrls.indexOf(currentVideo) === 0 || videoUrls.indexOf(currentVideo) === -1? false : true}
           width="100%"
           height="100%"
           onEnded={handleVideoEnd}
