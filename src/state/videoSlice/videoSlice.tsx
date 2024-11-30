@@ -28,9 +28,20 @@ interface YoutubeAPIItem {
     "items": [YoutubeAPISnippet]
 }
 
+const getLocalStorageData = (key: string, fallback: []) => {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : fallback;
+  }
+
 const apiKey= "AIzaSyB9flZMBsVPHLswQrWQmbrUnP6ya15HyWA"
 
-const initialState:VideoSliceState = {videos: [], videoUrls: [], currentVideo: null}
+const videoUrlsFromStorage: string[] = getLocalStorageData('videoUrls', [])
+
+const initialState:VideoSliceState = {
+    videos: getLocalStorageData("videos", []),
+    videoUrls: getLocalStorageData("vidoeUrls", []), 
+    currentVideo: videoUrlsFromStorage.length > 0? videoUrlsFromStorage[0] : null
+}
 
 const videoSlice = createSlice({
     name: "videoSlice",
@@ -59,7 +70,7 @@ const videoSlice = createSlice({
         },
         addUrl: (state, action:PayloadAction<string>) => {
             state.videoUrls.push(action.payload)
-            localStorage.setItem("videoUrls", JSON.stringify(state.videoUrls))
+            
         },
         setCurrentVideo: (state, action:PayloadAction<string>) => {
             state.currentVideo = action.payload
@@ -67,6 +78,7 @@ const videoSlice = createSlice({
         clearQueue: (state) => {
             state.videos = []
             state.videoUrls = []
+            localStorage.clear()
         }
     
     },
@@ -78,7 +90,7 @@ const videoSlice = createSlice({
             (state, action: PayloadAction<YoutubeAPISnippet | undefined>) => {
                 if(action.payload) {
                     state.videos.push(action.payload)
-                    localStorage.setItem("videosInfo", JSON.stringify(state.videos))
+                    
                 } else {
                     console.error("No valid video data to add")
                 }

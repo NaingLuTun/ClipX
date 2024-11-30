@@ -46,6 +46,7 @@ const VideosHolder = () => {
       }
       dispatch(addUrl(url))
       dispatch(addVideosAsync(url))
+
       if(currentVideo === null) {
         dispatch(setCurrentVideo(url))
       }
@@ -54,30 +55,21 @@ const VideosHolder = () => {
     }
 
     useEffect(() => {
-      const storedUrls = localStorage.getItem("videoUrls")
-      const storedVideosInfo = localStorage.getItem("videosInfo")
-      if(storedUrls) {
-        
-        const retrievedUrls: string[] = JSON.parse(storedUrls)
-        console.log(retrievedUrls)
-        retrievedUrls.map(urls => {
-          dispatch(addUrl(urls))
-        })
-        console.log("url arrays",videoUrls)
+      const storedVideos = localStorage.getItem("videos");
+      const storedVideoUrls = localStorage.getItem("videoUrls");
+  
+      if (storedVideos && storedVideoUrls) {
+        const parsedVideos = JSON.parse(storedVideos);
+        const parsedVideoUrls = JSON.parse(storedVideoUrls);
+        parsedVideos.map((video: string) => dispatch(addVideosAsync(video))); // Update with your action logic
+        parsedVideoUrls.map((url: string) => dispatch(addUrl(url)));
       }
+    }, [])
 
-      if(storedVideosInfo) {
-        
-        const retrievedVideos: string[] = JSON.parse(storedVideosInfo)
-        console.log(retrievedVideos)
-        retrievedVideos.map(videos => {
-          dispatch(addVideosAsync(videos))
-        })
-        console.log("vidoes array", videos)
-      }
-      
-
-    },[])
+    useEffect(() => {
+      localStorage.setItem("videos", JSON.stringify(videos));
+      localStorage.setItem("videoUrls", JSON.stringify(videoUrls));
+    }, [videos, videoUrls])
 
 
   return (
